@@ -1,5 +1,11 @@
+import Hero from "./components/Hero";
+
 const App = () => {
-  return <></>;
+  return (
+    <div className="w-full min-h-screen">
+      <Hero />
+    </div>
+  );
 };
 
 export default App;
