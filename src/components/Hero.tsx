@@ -5,7 +5,7 @@ const Hero = () => {
     <section className="relative h-screen w-full overflow-hidden">
       <div className="absolute inset-0 z-0">
         <img
-          src="https://images.unsplash.com/photo-1454447170982-596ddff4606a?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3Nzg4Nzd8MHwxfHNlYXJjaHwxfHxhdGhsZXRlJTIwcnVubmluZyUyMG5pa2V8ZW58MXx8fHwxNzY5MTQxOTMxfDA&ixlib=rb-4.1.0&q=80&w=1080"
+          src="/images/hero/hero-banner.jpg"
           alt="Nike Hero Background"
           className="w-full h-full object-cover"
         />
