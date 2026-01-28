@@ -4,10 +4,44 @@ import { ChevronLeft, ChevronRight } from "lucide-react";
 import SectionHeader from "./ui/SectionHeader";
 import { arrivals } from "../constant/Constant";
 
-const NewArrivals = () => {
-  const scrollContainerRef = useRef<HTMLDivElement>(null);
+const ScrollsButton = ({
+  onClick,
+}: {
+  onClick: (direction: "left" | "right") => void;
+}) => {
   const navigationClass =
     "p-3 rounded-full bg-white shadow-md hover:shadow-lg transition-shadow cursor-pointer";
+  return (
+    <motion.div
+      initial={{ opacity: 0, y: 30 }}
+      whileInView={{ opacity: 1, y: 0 }}
+      viewport={{ once: false }}
+      transition={{ duration: 0.6 }}
+      className="flex space-x-4"
+    >
+      <motion.button
+        whileHover={{ scale: 1.1 }}
+        whileTap={{ scale: 0.95 }}
+        onClick={() => onClick("left")}
+        className={navigationClass}
+      >
+        <ChevronLeft size={24} />
+      </motion.button>
+      <motion.button
+        whileHover={{ scale: 1.1 }}
+        whileTap={{ scale: 0.95 }}
+        onClick={() => onClick("right")}
+        className={navigationClass}
+      >
+        <ChevronRight size={24} />
+      </motion.button>
+    </motion.div>
+  );
+};
+
+const NewArrivals = () => {
+  const scrollContainerRef = useRef<HTMLDivElement>(null);
+
   const scroll = (direction: "left" | "right") => {
     if (scrollContainerRef.current) {
       const scrollAmount = 400;
@@ -33,30 +67,9 @@ const NewArrivals = () => {
           />
 
           {/* Navigation Buttons */}
-          <motion.div
-            initial={{ opacity: 0, y: 30 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: false }}
-            transition={{ duration: 0.6 }}
-            className="hidden md:flex space-x-4"
-          >
-            <motion.button
-              whileHover={{ scale: 1.1 }}
-              whileTap={{ scale: 0.95 }}
-              onClick={() => scroll("left")}
-              className={navigationClass}
-            >
-              <ChevronLeft size={24} />
-            </motion.button>
-            <motion.button
-              whileHover={{ scale: 1.1 }}
-              whileTap={{ scale: 0.95 }}
-              onClick={() => scroll("right")}
-              className={navigationClass}
-            >
-              <ChevronRight size={24} />
-            </motion.button>
-          </motion.div>
+          <div className="hidden md:flex space-x-4">
+            <ScrollsButton onClick={scroll} />
+          </div>
         </div>
 
         <div
@@ -107,6 +120,9 @@ const NewArrivals = () => {
             </motion.div>
           ))}
         </div>
+          <div className="flex md:hidden justify-end space-x-4">
+            <ScrollsButton onClick={scroll} />
+          </div>
       </div>
 
       <style>{`
